@@ -6,9 +6,9 @@
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
       </svg>
     </label>
-    <select class="form-select" aria-label="Platform selection" id="platform_selection" [(ngModel)]="selectedPlatform" [ngModelOptions]="{standalone: true}">
-      <option [value]="null" selected>Platform</option>
-      <option value="faceit">Faceit</option>
+    <select class="form-select" aria-label="Platform selection" id="platform_selection" [(ngModel)]="selectedPlatform" [ngModelOptions]="{standalone: true}" disabled>
+<!--      <option [value]="null" selected>Platform</option>-->
+      <option value="faceit" selected>Faceit</option>
       <option value="esea" disabled>ESEA</option>
       <option value="hltv" disabled>HLTV</option>
     </select>

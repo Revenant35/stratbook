@@ -23,7 +23,7 @@ export class TeamsComponent  {
   teams: Team[] = [];
   _loading: boolean = false;
 
-  selectedPlatform: string | null = null;
+  selectedPlatform: string | null = 'faceit';
   searchQuery: string = "";
   limit: number = 5;
 
