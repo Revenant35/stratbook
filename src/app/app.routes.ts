@@ -12,9 +12,9 @@ export const routes: Routes = [
   {
     path: 'teams/:id',
     loadComponent: () => import('./screens/team-info/team-info.component').then(m => m.TeamInfoComponent)
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
-  // {
-  //   path: '**',
-  //   redirectTo: ''
-  // }
 ];
