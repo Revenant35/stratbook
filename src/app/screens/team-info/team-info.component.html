@@ -1,0 +1,7 @@
+<div *ngIf="!team$; else loaded" class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<ng-template #loaded>
+  <app-players-list [players]="(team$ | async)!.members"></app-players-list>
+</ng-template>

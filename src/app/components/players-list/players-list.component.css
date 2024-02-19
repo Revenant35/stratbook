@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  padding: 20px;
+  min-width: 800px;
+}
+
+.avatar {
+  height: 2.5em;
+  width: 2.5em;
+  border-radius: 50%;
+}
+
+.avatar-image {
+
+}
+
+.avatar-no-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+app-flag {
+  height: 1em;
+  width: 1em;
+}
