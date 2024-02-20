@@ -7,6 +7,7 @@ export interface Team {
   notifications: any[];
 
   avatar?: string;
+  leader?: string;
   faceit_url?: string;
   team_id?: string;
 }

@@ -21,10 +21,14 @@
             </div>
 
             <div class="ms-2 me-2">
-              <div class="fw-bold">{{ player.nickname }}</div>
-              Content for list item
+              <div class="fw-bold">
+                {{ player.nickname }}
+                <ng-container *ngIf="leader && player.user_id === leader">
+                  <span data-bs-placement="top" data-bs-toggle="tooltip" title="Leader">👑</span>
+                </ng-container>
+              </div>
+              <!--              Content for list item-->
             </div>
-
             <app-flag [country_code]="player.country" class="ms-2 me-auto"></app-flag>
 
             <a
