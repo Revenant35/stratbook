@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {map} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Team} from "../models/team";
@@ -38,7 +38,18 @@ export class TeamService {
 
     return this.http
       .get<any>(`https://open.faceit.com/data/v4/search/teams`, {params: httpParams, headers: headers})
-      .pipe(map((data => data.items)));
+      .pipe(
+        tap(data => console.log({endpoint: 'https://open.faceit.com/data/v4/search/teams', params: httpParams, headers: headers, data: data})),
+        map(data => data.items),
+        tap(teams => console.log({teams})),
+        // replace {lang} with 'en' in faceit_url
+        map(teams => teams.map((team: any) => {
+          return {
+            ...team,
+            faceit_url: decodeURI(team.faceit_url).replace('{lang}', 'en'),
+          };
+        }))
+      );
   }
 
   getFaceitTeam(id: string): Observable<Team> {
@@ -51,7 +62,16 @@ export class TeamService {
 
     return this.http
       .get<any>(`https://open.faceit.com/data/v4/teams/${id}`, {headers: headers})
-      .pipe(map((team =>{
+      .pipe(
+        tap(data => console.log({endpoint: 'https://open.faceit.com/data/v4/teams/${id}', headers: headers, data: data})),
+        map(team => {
+          return {
+            ...team,
+            faceit_url: decodeURI(team.faceit_url).replace('{lang}', 'en'),
+          };
+        }),
+        tap(team => console.log("Team URL updated: ", {team})),
+        map(team => {
           return {
             ...team,
             members: team.members.map((member: any) => {
@@ -61,8 +81,9 @@ export class TeamService {
               };
             })
           };
-        }
-      )));
+        }),
+        tap(team => console.log("Member URL(s) updated: ", {team})),
+      );
   }
 
   constructor(private http: HttpClient) { }
