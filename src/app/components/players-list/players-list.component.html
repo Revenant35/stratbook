@@ -1,38 +1,51 @@
 <div class="card">
   <div class="card-header">Players</div>
   <div class="card-body">
-    <ul class="list-group list-group-flush">
-      <li *ngFor="let player of players" class="list-group-item d-flex justify-content-between align-items-center">
-        <div class="me-2">
-          <img *ngIf="player.avatar; else noAvatar" [src]="player.avatar" alt="avatar" class="avatar avatar-image">
-          <ng-template #noAvatar>
-            <div class="bg-dark-subtle avatar avatar-no-image">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
-              </svg>
+    <ng-container *ngIf="!loading; else isLoading">
+      <ul class="list-group list-group-flush">
+        <ng-container *ngFor="let player of players">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="me-2">
+              <ng-container *ngIf="player.avatar; else noAvatar">
+                <img [src]="player.avatar" alt="avatar" class="avatar avatar-image">
+              </ng-container>
+              <ng-template #noAvatar>
+                <div class="bg-dark-subtle avatar avatar-no-image">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                  </svg>
+                </div>
+              </ng-template>
             </div>
-          </ng-template>
+
+            <div class="ms-2 me-2">
+              <div class="fw-bold">{{ player.nickname }}</div>
+              Content for list item
+            </div>
+
+            <app-flag class="ms-2 me-auto" [country_code]="player.country"></app-flag>
+
+            <a href="/players/{{player.user_id}}" class="btn btn-link btn-secondary ms-auto me-1 icon d-flex justify-content-center align-items-center p-2 text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+              </svg>
+            </a>
+
+            <a [href]="player.faceit_url" target="_blank" class="btn btn-link btn-secondary ms-1 me-2 icon d-flex justify-content-center align-items-center p-2">
+              <svg height="1520" viewBox="29.3 101.1 451.7 357.9" width="2500" xmlns="http://www.w3.org/2000/svg"><path d="m481 104.8c0-1.8-1.9-3.7-1.9-3.7-1.8 0-1.8 0-3.7 1.9-37.5 58.1-76.8 116.2-114.3 176.2h-326.2c-3.7 0-5.6 5.6-1.8 7.5 134.9 50.5 331.7 127.3 440.4 170.4 3.7 1.9 7.5-1.9 7.5-3.7z" fill="#fd5a00"/><path d="m481 104.8c0-1.8-1.9-3.7-1.9-3.7-1.8 0-1.8 0-3.7 1.9-37.5 58.1-76.8 116.2-114.3 176.2l119.9 1.23z" fill="#ff690a"/></svg>
+            </a>
+
+            <!--        <span *ngIf="team.notifications.length !== 0" class="badge bg-primary rounded-pill">{{team.notifications.length}}</span>-->
+          </li>
+        </ng-container>
+      </ul>
+    </ng-container>
+    <ng-template #isLoading>
+      <div class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
-
-        <div class="ms-2 me-2">
-          <div class="fw-bold">{{ player.nickname }}</div>
-          Content for list item
-        </div>
-
-        <app-flag class="ms-2 me-auto" [country_code]="player.country"></app-flag>
-
-        <a href="/players/{{player.user_id}}" class="btn btn-link btn-secondary ms-auto me-1 icon d-flex justify-content-center align-items-center p-2 text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-          </svg>
-        </a>
-
-        <a [href]="player.faceit_url" target="_blank" class="btn btn-link btn-secondary ms-1 me-2 icon d-flex justify-content-center align-items-center p-2">
-          <svg height="1520" viewBox="29.3 101.1 451.7 357.9" width="2500" xmlns="http://www.w3.org/2000/svg"><path d="m481 104.8c0-1.8-1.9-3.7-1.9-3.7-1.8 0-1.8 0-3.7 1.9-37.5 58.1-76.8 116.2-114.3 176.2h-326.2c-3.7 0-5.6 5.6-1.8 7.5 134.9 50.5 331.7 127.3 440.4 170.4 3.7 1.9 7.5-1.9 7.5-3.7z" fill="#fd5a00"/><path d="m481 104.8c0-1.8-1.9-3.7-1.9-3.7-1.8 0-1.8 0-3.7 1.9-37.5 58.1-76.8 116.2-114.3 176.2l119.9 1.23z" fill="#ff690a"/></svg>
-        </a>
-
-<!--        <span *ngIf="team.notifications.length !== 0" class="badge bg-primary rounded-pill">{{team.notifications.length}}</span>-->
-      </li>
-    </ul>
+      </div>
+    </ng-template>
   </div>
 </div>

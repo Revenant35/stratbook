@@ -20,12 +20,18 @@ import {AsyncPipe, NgIf} from "@angular/common";
 })
 export class TeamInfoComponent implements OnInit {
   team: Team | null = null;
+  _loading: boolean = true;
 
   constructor(private route: ActivatedRoute, private teamService: TeamService) {}
 
   async ngOnInit() {
     const id = await firstValueFrom(this.route.params).then(params => params['id']);
     this.team = await firstValueFrom(this.teamService.getFaceitTeam(id));
+    this._loading = false;
+  }
+
+  get loading() {
+    return this._loading;
   }
 
 }
