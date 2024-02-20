@@ -1,13 +1,12 @@
-
 <main class="container-lg">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
       <li class="breadcrumb-item"><a routerLink="/teams">Search</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{team?.name || 'Loading...'}}</li>
+      <li aria-current="page" class="breadcrumb-item active">{{ team?.name || 'Loading...' }}</li>
     </ol>
   </nav>
 
-  <app-players-list [players]="team?.members ?? []" [loading]="loading"></app-players-list>
+  <app-players-list [loading]="loading" [players]="team?.members ?? []"></app-players-list>
 
 </main>

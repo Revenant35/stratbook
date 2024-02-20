@@ -2,13 +2,13 @@
   <div class="card-header">Map Viewer</div>
   <div class="card-body">
     <div class="mb-2">
-      <select class="form-select text-bg-secondary" (change)="selectMap($event.target)">
-        <option *ngFor="let map of maps" [value]="map.name">{{map.name}}</option>
+      <select (change)="selectMap($event.target)" class="form-select text-bg-secondary">
+        <option *ngFor="let map of maps" [value]="map.name">{{ map.name }}</option>
       </select>
     </div>
 
     <div class="mt-2">
-      <img [src]="selectedMap.image" [alt]="selectedMap.name" class="map-image">
+      <img [alt]="selectedMap.name" [src]="selectedMap.image" class="map-image">
       <!-- Implement interactive elements for placing players on the map -->
     </div>
 
