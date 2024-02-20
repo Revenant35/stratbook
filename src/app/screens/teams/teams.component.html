@@ -1,4 +1,12 @@
 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Search</li>
+  </ol>
+</nav>
+
+
 <form (submit)="searchTeams()">
   <div class="input-group mb-3">
     <label class="input-group-text" for="team_search">
@@ -24,7 +32,7 @@
       <ng-container *ngIf="teams.length !== 0; else noResults">
         <ul class="list-group list-group-flush">
           <ng-container *ngFor="let team of teams">
-            <a [routerLink]="team.team_id" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
               <div class="me-2">
                 <img *ngIf="team.avatar; else noAvatar" [src]="team.avatar" alt="avatar" class="avatar avatar-image">
                 <ng-template #noAvatar>
@@ -39,8 +47,16 @@
                 <div class="fw-bold">{{ team.name }}</div>
                 Content for list item
               </div>
+              <a [href]="team.faceit_url" target="_blank" class="btn btn-link btn-secondary ms-auto me-1 icon d-flex justify-content-center align-items-center p-2">
+                <svg height="1520" viewBox="29.3 101.1 451.7 357.9" width="2500" xmlns="http://www.w3.org/2000/svg"><path d="m481 104.8c0-1.8-1.9-3.7-1.9-3.7-1.8 0-1.8 0-3.7 1.9-37.5 58.1-76.8 116.2-114.3 176.2h-326.2c-3.7 0-5.6 5.6-1.8 7.5 134.9 50.5 331.7 127.3 440.4 170.4 3.7 1.9 7.5-1.9 7.5-3.7z" fill="#fd5a00"/><path d="m481 104.8c0-1.8-1.9-3.7-1.9-3.7-1.8 0-1.8 0-3.7 1.9-37.5 58.1-76.8 116.2-114.3 176.2l119.9 1.23z" fill="#ff690a"/></svg>
+              </a>
+              <a [routerLink]="team.team_id" class="btn btn-link btn-secondary ms-1 me-2 icon d-flex justify-content-center align-items-center p-2 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                </svg>
+              </a>
               <!--        <span *ngIf="team.notifications.length !== 0" class="badge bg-primary rounded-pill">{{team.notifications.length}}</span>-->
-            </a>
+            </li>
           </ng-container>
         </ul>
       </ng-container>

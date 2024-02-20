@@ -1,7 +1,20 @@
-<div *ngIf="!team$; else loaded" class="spinner-border" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
 
-<ng-template #loaded>
-  <app-players-list [players]="(team$ | async)!.members"></app-players-list>
-</ng-template>
+<main class="container-lg">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/teams">Search</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{team?.name || 'loading'}}</li>
+    </ol>
+  </nav>
+
+  <ng-container *ngIf="team; else noTeam">
+    <app-players-list [players]="team.members"></app-players-list>
+  </ng-container>
+
+  <ng-template #noTeam>
+    <div *ngIf="!team" class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </ng-template>
+</main>

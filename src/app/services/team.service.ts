@@ -51,7 +51,18 @@ export class TeamService {
 
     return this.http
       .get<any>(`https://open.faceit.com/data/v4/teams/${id}`, {headers: headers})
-      .pipe();
+      .pipe(map((team =>{
+          return {
+            ...team,
+            members: team.members.map((member: any) => {
+              return {
+                ...member,
+                faceit_url: decodeURI(member.faceit_url).replace('{lang}', 'en'),
+              };
+            })
+          };
+        }
+      )));
   }
 
   constructor(private http: HttpClient) { }

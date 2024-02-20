@@ -24,3 +24,8 @@ app-flag {
   height: 1em;
   width: 1em;
 }
+
+.icon svg {
+  height: 1em;
+  width: 1em;
+}
