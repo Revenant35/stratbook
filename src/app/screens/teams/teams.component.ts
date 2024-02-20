@@ -31,7 +31,7 @@ export class TeamsComponent  {
   }
 
   get isSearchValid() {
-    return this.selectedPlatform !== null && this.searchQuery !== null;
+    return this.selectedPlatform && this.searchQuery;
   }
 
   async searchTeams() {
